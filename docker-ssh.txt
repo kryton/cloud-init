@@ -1,0 +1,24 @@
+#cloud-config
+
+coreos:
+  units:
+    - name: docker-tcp.socket
+      command: start
+      enable: true
+      content: |
+        [Unit]
+        Description=Docker Socket for the API
+
+        [Socket]
+        ListenStream=2375
+        BindIPv6Only=both
+        Service=docker.service
+
+        [Install]
+        WantedBy=sockets.target
+
+ssh_authorized_keys:
+ - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDUBL6f9V30MVOmGKbmyRyhK0q0/F4YQNkTy8ndNyX+a71LoQdk2ekJiqZta6k5j3PYNuAX6y2afFPUnQ28F4X6xMNUmgEm8MFMtlECqa2PguYgTH0AKOlPPE9GvTP7ZgS6f+nJPYh/x3joFXVSwI+yNd3GsgR7XZk6jrPN+Sm8LtPZT7zosZtULuzAw0fDaVbpnWDJAs/sr3093n6/AnnPEBQxED8vHtmftrIRvptpPC4YEE8Pe3fIO6WtRZ8G8zWF660Tw3hWFwVFUPxGcG5NLb9+33Wz2qV0xbuZ564bkWsrcHkYL7rEuZAhWWYJzbHUvvoC93ej55jYfJh/QyGcLKTTcqi2qItR26wchuFSRqFLd12Fab3Gg2b+0DvhypVhziBX7UvBU3JNAyo7vpnNo8TnDo2eCwB7hGXB4L/dP7C/78b9AJJYGNKWFM2wWkfm5EScqQShaAQpI7jCUQESEOqXGxYc2aGEIT2tI1JJw5Jn7oR84YcP1M7urgp2neTZGdyVKzfueVfO9739If06SfFuxj3tmgF5RMwanHUKpOxLnRQ0SslrgbzEYXYVDB4uqzqrPrwgwwRfYHZVt1YXZy0eBcE8rPLbuAv+pwqZ/JQRkrWtzoc6TgDMIzU+OKikLi/VlAY4IeD6f0wbzZrV/0G8hWX1c/2AzwYaBZU6dQ== ian@zilbo.com
+
+hostname: coreos1
+
